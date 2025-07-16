@@ -1,0 +1,4 @@
+### GET request to patients list
+GET localhost:4000/api/patients
+
+###
