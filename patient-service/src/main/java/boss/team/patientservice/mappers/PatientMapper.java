@@ -1,9 +1,12 @@
 package boss.team.patientservice.mappers;
 
+import boss.team.patientservice.dtos.PatientRequestDTO;
 import boss.team.patientservice.dtos.PatientResponseDTO;
 import boss.team.patientservice.entities.Patient;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
 
 @Service
 public class PatientMapper {
@@ -17,9 +20,11 @@ public class PatientMapper {
         return patientResponseDTO;
     }
 
-    public Patient toPatient(PatientResponseDTO patientResponseDTO) {
+    public Patient toPatient(PatientRequestDTO patientRequestDTO) {
         Patient patient = new Patient();
-        BeanUtils.copyProperties(patientResponseDTO, patient);
+        BeanUtils.copyProperties(patientRequestDTO, patient);
+        patient.setDateOfBirth(LocalDate.parse(patientRequestDTO.getDateOfBirth()));
         return patient;
     }
+
 }

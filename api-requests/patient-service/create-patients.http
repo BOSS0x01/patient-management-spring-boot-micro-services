@@ -1,0 +1,13 @@
+### POST request to create a new patient
+POST localhost:4000/api/patients
+Content-Type: application/json
+
+{
+  "name": "houssam",
+  "address": "oulad lahssen",
+  "dateOfBirth": "2003-10-18",
+  "email": "houssam@gmail.com",
+  "registrationDate": "1953-10-12"
+}
+
+###

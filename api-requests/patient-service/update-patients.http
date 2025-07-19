@@ -1,0 +1,12 @@
+### PUT request to update a patient
+PUT localhost:4000/api/patients/123e4567-e89b-12d3-a456-426614174004
+Content-Type: application/json
+
+{
+  "name": "houssamfgfgfgf",
+  "address": "oulad lahssen",
+  "dateOfBirth": "2003-10-18",
+  "email": "houssams@gmail.com"
+}
+
+###
