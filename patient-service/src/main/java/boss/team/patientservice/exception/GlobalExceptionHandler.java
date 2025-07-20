@@ -14,6 +14,7 @@ import java.util.Map;
 public class GlobalExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String,String>> handleValidationException(MethodArgumentNotValidException ex) {
+        log.warn("Validation didn't pass {}", ex.getMessage());
         Map<String, String> errors = new HashMap<>();
         ex.getBindingResult().getFieldErrors().forEach((error) -> errors.put(error.getField(), error.getDefaultMessage()));
         return ResponseEntity.badRequest().body(errors);
@@ -23,7 +24,15 @@ public class GlobalExceptionHandler {
     public ResponseEntity<Map<String,String>> handleEmailAlreadyExistsException(EmailAlreadyExistsException ex) {
         log.warn("Email address already exist {}", ex.getMessage());
         Map<String, String> errors = new HashMap<>();
-        errors.put("email", ex.getMessage());
+        errors.put("message", ex.getMessage());
+        return ResponseEntity.badRequest().body(errors);
+    }
+
+    @ExceptionHandler(PatientNotFoundException.class)
+    public ResponseEntity<Map<String,String>> handlePatientNotFoundException(PatientNotFoundException ex) {
+        log.warn("Patient doesn't exist {}", ex.getMessage());
+        Map<String, String> errors = new HashMap<>();
+        errors.put("message", ex.getMessage());
         return ResponseEntity.badRequest().body(errors);
     }
 }
